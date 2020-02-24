@@ -10,14 +10,22 @@ def getName():
     return first, last
 
 def buildName(first, last):
-    return (first + "." + last)
+    fullName = first + "." + last
+    return fullName.lower()
 
-def checkStrength(passwd):
+def getPass():
+    passwd = input("Create a new password: ")
+    realStrength(passwd)
+    print("The force is strong in this one…")
+    return passwd
+
+def realStrength(passwd):
     while len(passwd) < 8:
         print("Fool of a Took! That password is feeble!")
         passwd = input("Create a new password: ")
-    print("The force is strong in this one…")
-    return passwd
+    while (passwd.isupper() or passwd.islower()):
+        print("Password not strong enough, use both upper and lower case!")
+        passwd = input("Create a new password: ")
 
 def main():
     # get user's first and last names
@@ -27,10 +35,8 @@ def main():
     uname = buildName(first,last)
     
     # ask user to create a new password
-    passwd = input("Create a new password: ")
+    getPass()
     
-    # ensure the password has at least 8 characters
-    checkStrength(passwd)
     print("Account configured. Your new email address is",
     uname + "@marist.edu")
 main()
